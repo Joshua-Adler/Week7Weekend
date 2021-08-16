@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js" defer></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/js/bootstrap.min.js" defer></script>
+	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" defer></script>
+	<script src="main.js" defer></script>
+	<title>Weather</title>
+</head>
+
+<body>
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<div class="container-fluid">
+			<button onclick="getMyWeather()" class="btn btn-outline-primary" type="button">My Location</button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<form onsubmit="getCityWeather('inputCity'); return false" class="d-flex" style="margin-left: auto">
+					<input id="inputCity" class="form-control me-2" type="search" placeholder="City">
+					<button class="btn btn-outline-success" type="submit">Go</button>
+				</form>
+			</div>
+		</div>
+	</nav>
+	<div id="container">
+		<h1 id="city" style="text-align: center"></h1>
+	</div>
+</body>
+<template id="currentWeather">
+	<img id="icon">
+	<div class="center">
+		<i class="h2 bi-thermometer text-success"></i>
+		<small class="text-secondary">Min</small><span id="tempMin" class="h4 text-info"></span>
+		<small class="text-secondary">Cur</small><span id="temp" class="h1"></span>
+		<small class="text-secondary">Max</small><span id="tempMax" class="h4 text-danger"></span>
+		<br>
+		<br>
+		<span class="space">
+			<i class="h2 bi-cloud-rain text-primary"> </i>
+			<span id="rain" class="h2"></span>
+		</span>
+		<span class="space">
+			<i class="h2 bi-moisture text-info"> </i>
+			<span id="humidity" class="h2"></span>
+		</span>
+		<span class="space">
+			<i class="h2 bi-wind"> </i>
+			<span id="wind" class="h2"></span>
+		</span>
+		<span class="space">
+			<i class="h2 bi-clouds text-secondary"> </i>
+			<span id="clouds" class="h2"></span>
+		</span>
+		<br>
+		<br>
+		<span class="space">
+			<i class="h2 bi-sunrise text-warning"> </i>
+			<span id="sunrise" class="h3"></span>
+		</span>
+		<span class="space">
+			<i class="h2 bi-sun text-danger"></i>
+			<small class="text-secondary">Cur</small><span id="uviCur" class="h2"></span>
+			<small class="text-secondary">Max</small><span id="uviMax" class="h2"></span>
+		</span>
+		<span class="space">
+			<i class="h2 bi-sunset text-warning"> </i>
+			<span id="sunset" class="h3"></span>
+		</span>
+	</div>
+</template>
+<template id="forecast">
+	<br>
+	<canvas onmouseleave="hideInfo()" onmouseenter="showInfo()" onmousemove="moveInfo(event)" id="cvs" width="1024"
+		height="256">
+	</canvas>
+	<div id="graphInfo">
+		<i class="h4 bi-clock text-secondary"> </i><span id="graphTime" class="h4"></span>
+		<br>
+		<i class="h4 bi-thermometer text-success"></i><span id="graphTemp" class="h4"></span>
+		<br>
+		<i class="h4 bi-cloud-rain text-primary"> </i><span id="graphRain" class="h4"></span>
+	</div>
+	<small class="center text-secondary" style="display: block">(hover mouse)</small>
+</template>
+
+</html>

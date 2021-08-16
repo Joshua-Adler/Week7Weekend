@@ -1,0 +1,33 @@
+#container {
+	margin: 50px;
+}
+
+#cvs {
+	display: block;
+	margin: auto;
+	width: 50%;
+}
+
+#graphInfo {
+	display: none;
+	position: absolute;
+	padding: 10px;
+	background-color: #80808040;
+	backdrop-filter: blur(7px);
+	border-radius: 10px;
+	border: 1px solid black;
+}
+
+.center {
+	text-align: center;
+}
+
+.space {
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+img {
+	display: block;
+	margin: auto;
+}
