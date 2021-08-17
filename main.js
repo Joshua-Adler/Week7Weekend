@@ -1,8 +1,12 @@
-// Prompt the user for an API key.
-// Can also be set so there's no prompt (if you're reading this code)
+// Check if we can get the API key from cookies
 var API_KEY = null;
+if(document.cookie) {
+	API_KEY = document.cookie.substring(document.cookie.indexOf('=') + 1);
+}
+// Prompt the user for an API key.
 if(!API_KEY) {
 	API_KEY = prompt('API Key');
+	document.cookie = `API_KEY = ${API_KEY};`;
 }
 
 // Templates
@@ -129,7 +133,7 @@ function readInfo(data) {
 		sunset: getTime(new Date(data.current.sunset * 1000)),
 		humidity: `${data.current.humidity}%`,
 		icon: iconURL(data.current.weather[0].icon, scale=4),
-		rain: data.current.rain ? `${data.current.rain}mm` : '0mm'
+		rain: data.daily[0].rain ? `${data.daily[0].rain}mm` : '0mm'
 	};
 }
 
@@ -143,7 +147,7 @@ function showCurrentWeather(data) {
 	document.getElementById('temp').innerHTML = info.temp;
 	document.getElementById('tempMax').innerHTML = info.tempMax;
 
-	document.getElementById('rain').innerHTML = '0mm';
+	document.getElementById('rain').innerHTML = info.rain;
 	document.getElementById('humidity').innerHTML = info.humidity;
 	document.getElementById('wind').innerHTML = info.wind;
 	document.getElementById('clouds').innerHTML = info.clouds;
