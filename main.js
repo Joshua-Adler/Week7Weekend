@@ -18,6 +18,7 @@ var points = null;
 getMyWeather();
 
 function showWeather(data) {
+	console.log(data);
 	showCurrentWeather(data);
 	showForecast(data);
 }
@@ -69,7 +70,7 @@ function showForecast(data) {
 	ctx.clearRect(0, 0, cvs.width, cvs.height);
 	ctx.lineWidth = 2;
 	// Temperature lines
-	ctx.strokeStyle = '#198754';
+	ctx.strokeStyle = '#DF8B46';
 	let rangeTemp = calcRange(points, 'temp');
 	ctx.beginPath();
 	ctx.moveTo(-1e9, 0);
